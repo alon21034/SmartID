@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="alon.ntu.smartid"
+    android:versionCode="1"
+    android:versionName="1.0" >
+
+	<uses-permission android:name="android.permission.BIND_NFC_SERVICE"/>
+    <uses-permission android:name="android.permission.NFC" />
+    
+	<uses-feature android:name="android.hardware.nfc.hce"/>
+	
+    <uses-sdk
+        android:minSdkVersion="22"
+        android:targetSdkVersion="22" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme" >
+        <activity
+            android:name="alon.ntu.smartid.MainActivity"
+            android:label="@string/app_name" 
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        
+        <activity 
+            android:name="alon.ntu.smartid.ServerListActicity"
+            android:label="@string/app_name"
+            android:launchMode="singleTop"
+            />
+        
+        <service
+            android:name="alon.ntu.smartid.MyHostApduService"
+            android:exported="true"
+            android:permission="android.permission.BIND_NFC_SERVICE"
+             >
+            <intent-filter>
+                <action android:name="android.nfc.cardemulation.action.HOST_APDU_SERVICE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.nfc.cardemulation.host_apdu_service"
+                android:resource="@xml/apduservice" />
+        </service>
+    </application>
+
+</manifest>
